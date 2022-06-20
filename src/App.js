@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-js";
 import "./App.css";
+import UserPage from "./components/UserPage";
+import LoginButton from "./components/LoginButton";
+import NavBar from "./components/NavBar";
+import ArtistPage from "./components/ArtistPage";
 
 const spotify = new SpotifyWebApi();
 
-const CLIENT_ID = "ee76b712a77f48d9b3cb9f643c58c777";
-const REDIRECT_URI = "http://localhost:4000";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const RESPONSE_TYPE = "token";
-const scopes = [
-  "user-read-recently-played",
-  "user-read-playback-position",
-  "user-top-read",
-  "user-follow-read",
-  "playlist-read-private",
-  "user-library-read",
-  "user-read-currently-playing",
-  "user-read-playback-state",
-];
-
 function App() {
   // const [spotifyToken, setSpotifyToken] = useState("")
+  const initialUserProfile = {
+    display_name: "",
+    images: [{ url: "" }],
+    external_urls: { spotify: "" },
+  };
   const [token, setToken] = useState("");
+  const [userProfile, setUserProfile] = useState(initialUserProfile);
+  const [topArtists, setTopArtists] = useState([]);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -40,10 +37,6 @@ function App() {
       setToken(token);
 
       spotify.setAccessToken(token);
-
-      spotify.getMyTopArtists().then((user) => {
-        console.log("Top Artists:", user);
-      });
 
       spotify.getMyTopTracks().then((user) => {
         console.log("Top Tracks:", user);
@@ -65,9 +58,7 @@ function App() {
         console.log("Currently playing:", user);
       });
 
-      spotify.getMe().then((user) => {
-        console.log("Get me:", user);
-      });
+      spotify.getMe().then(setUserProfile);
     }
 
     setToken(token);
@@ -76,24 +67,24 @@ function App() {
   const logout = () => {
     setToken("");
     window.localStorage.removeItem("token");
+    setUserProfile(initialUserProfile);
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Spotify React</h1>
-        {!token ? (
-          <a
-            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
-              "%20"
-            )}&response_type=${RESPONSE_TYPE}`}
-          >
-            Login to Spotify
-          </a>
-        ) : (
-          <button onClick={logout}>Logout</button>
-        )}
+        <NavBar username={userProfile.display_name} />
       </header>
+      <div>
+        {!token ? <LoginButton /> : <button onClick={logout}>Logout</button>}
+
+        <Routes>
+          <Route path="/" element={<UserPage user={userProfile} />} />
+        </Routes>
+        <Routes>
+          <Route path="/artists" element={<ArtistPage spotify={spotify} />} />
+        </Routes>
+      </div>
     </div>
   );
 }
