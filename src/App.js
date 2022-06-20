@@ -18,7 +18,6 @@ function App() {
   };
   const [token, setToken] = useState("");
   const [userProfile, setUserProfile] = useState(initialUserProfile);
-  const [topArtists, setTopArtists] = useState([]);
 
   useEffect(() => {
     const hash = window.location.hash;
