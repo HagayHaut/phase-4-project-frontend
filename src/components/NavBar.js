@@ -10,7 +10,6 @@ const NavUl = styled.ul`
   flex-flow: row wrap;
   align-items: center;
   justify-content: flex-end;
-  text-decoration: none;
   background: #212121;
   overflow: hidden;
   top: 0;
@@ -18,12 +17,19 @@ const NavUl = styled.ul`
 
 const linkStyle = {
   margin: "1rem",
-  textDecoration: "underline",
-  color: '#1DB954'
+  textDecoration: "none",
+  color: '#1DB954',
+  cursor: 'pointer'
 }
 
+const NavItem = styled.p`
+  margin: 1rem;
+  color: '#1DB954';
+  cursor: 'pointer';
+`;
 
-function NavBar({ username }) {
+
+function NavBar({ username, logout }) {
   return (
     <NavUl>
           <Link to="/" style={linkStyle}>
@@ -32,6 +38,7 @@ function NavBar({ username }) {
           <Link to="/artists" style={linkStyle}>
             Top 20 Artists
           </Link>
+          <NavItem style={linkStyle} onClick={logout}>Logout</NavItem>
     </NavUl>
   );
 }

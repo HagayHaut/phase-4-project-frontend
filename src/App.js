@@ -91,7 +91,7 @@ function App() {
   return (
     <Container>
       <Header>
-        {userProfile.display_name ? <NavBar username={userProfile.display_name} /> : null}
+        {userProfile.display_name ? <NavBar username={userProfile.display_name} logout={logout} /> : null}
       </Header>
       <Content>
         {!token ? <LandingPage /> : <button onClick={logout}>Logout</button>}
