@@ -48,7 +48,7 @@ function UserPage({
       </div>
       <h3>Recently Played:</h3>
       <RecentlyPlayed recentlyPlayed={recentlyPlayed} />
-    </div>
+    </Container>
   );
 }
 
