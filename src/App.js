@@ -3,11 +3,21 @@ import { Routes, Route } from "react-router-dom";
 import SpotifyWebApi from "spotify-web-api-js";
 import "./App.css";
 import UserPage from "./components/UserPage";
-import LoginButton from "./components/LoginButton";
+import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import ArtistPage from "./components/ArtistPage";
+import styled from 'styled-components';
 
 const spotify = new SpotifyWebApi();
+
+const Container = styled.div`
+  background-color: #212121;
+  position:absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+`;
 
 function App() {
   // const [spotifyToken, setSpotifyToken] = useState("")
@@ -70,12 +80,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar username={userProfile.display_name} />
+    <Container>
+      <header>
+        {userProfile.display_name ? <NavBar username={userProfile.display_name} /> : null}
       </header>
       <div>
-        {!token ? <LoginButton /> : <button onClick={logout}>Logout</button>}
+        {!token ? <LandingPage /> : <button onClick={logout}>Logout</button>}
 
         <Routes>
           <Route path="/" element={<UserPage user={userProfile} />} />
@@ -84,7 +94,7 @@ function App() {
           <Route path="/artists" element={<ArtistPage spotify={spotify} />} />
         </Routes>
       </div>
-    </div>
+    </Container>
   );
 }
 
