@@ -8,8 +8,8 @@ function ArtistPage({ spotify }) {
     spotify.getMyTopArtists().then((data) => setTopArtists(data.items));
   });
 
-  const artistCards = topArtists.map((artist) => (
-    <ArtistCard artist={artist} />
+  const artistCards = topArtists.map((artist, index) => (
+    <ArtistCard artist={artist} index={index}/>
   ));
 
   return <div className="artist-page">{artistCards}</div>;

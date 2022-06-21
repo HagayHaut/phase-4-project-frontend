@@ -30,7 +30,7 @@ function NavBar({ username }) {
             {username}
           </Link>
           <Link to="/artists" style={linkStyle}>
-            Artists
+            Top 20 Artists
           </Link>
     </NavUl>
   );

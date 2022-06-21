@@ -1,19 +1,8 @@
 .artist-page {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
-  grid-gap: 1rem;
+
   width: 100%;
-}
-
-.artist-card {
-  display: inline-block;
-  border: 1px solid white;
-  text-align: center;
-}
-
-.artist-photo {
-  height: 100px;
-  width: auto;
 }
 
 * {

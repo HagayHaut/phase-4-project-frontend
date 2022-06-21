@@ -24,6 +24,10 @@ const Header = styled.header`
   top: 0;
 `;
 
+const Content = styled.div`
+  background: #212121;
+`;
+
 function App() {
   // const [spotifyToken, setSpotifyToken] = useState("")
   const initialUserProfile = {
@@ -89,7 +93,7 @@ function App() {
       <Header>
         {userProfile.display_name ? <NavBar username={userProfile.display_name} /> : null}
       </Header>
-      <div>
+      <Content>
         {!token ? <LandingPage /> : <button onClick={logout}>Logout</button>}
 
         <Routes>
@@ -98,7 +102,7 @@ function App() {
         <Routes>
           <Route path="/artists" element={<ArtistPage spotify={spotify} />} />
         </Routes>
-      </div>
+      </Content>
     </Container>
   );
 }
