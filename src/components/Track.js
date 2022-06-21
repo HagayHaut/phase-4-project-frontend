@@ -9,14 +9,35 @@ const TrackItem = styled.div`
 `;
 
 function Track({ index, track }) {
-  const { album, artists, name } = track;
+  const { album, artists, name, external_urls } = track;
 
-  function formatArtists() {}
+  function formatArtists() {
+    let artistNames = artists.map((artist) => artist.name);
+    let result = artistNames[0];
+    if (artistNames.length > 1) {
+      for (let i = 1; i < artistNames.length - 1; i++) {
+        result += `, ${artistNames[i]}`;
+      }
+      result += `, and ${artistNames[artistNames.length - 1]}`;
+    }
+    return result;
+  }
+
+  function getAlbumYear() {
+    return album.release_date.substr(0, 4);
+  }
 
   return (
     <TrackItem>
-      <img src={album.images[album.images.length - 1].url} alt="album cover" />
+      <a href={external_urls.spotify} target="_blank">
+        <img
+          src={album.images[album.images.length - 1].url}
+          alt="album cover"
+        />
+      </a>
+      <p>{getAlbumYear()}</p>
       <p>{`${index + 1}. ${name}`}</p>
+      <p>{formatArtists()}</p>
     </TrackItem>
   );
 }

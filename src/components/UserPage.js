@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
+import RecentlyPlayed from "./RecentlyPlayed";
 import styled from "styled-components";
 
-function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
+function UserPage({
+  user,
+  currentlyPlaying,
+  numberArtistsFollowing,
+  recentlyPlayed,
+}) {
   const { display_name, images, external_urls, followers } = user;
   // console.log(currentlyPlaying)
 
@@ -34,9 +40,15 @@ function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
         <p>Followers: {followers.total}</p>
         <p>Following: {numberArtistsFollowing}</p>
         <h3>Currently Playing:</h3>
-        <p>{currentlyPlaying.item.name ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "No song currently playing!"} </p>
+        <p>
+          {currentlyPlaying.item.name
+            ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}`
+            : "None"}{" "}
+        </p>
       </div>
-    </Container>
+      <h3>Recently Played:</h3>
+      <RecentlyPlayed recentlyPlayed={recentlyPlayed} />
+    </div>
   );
 }
 

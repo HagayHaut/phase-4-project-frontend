@@ -45,10 +45,13 @@ function App() {
 
   const [token, setToken] = useState("");
   const [userProfile, setUserProfile] = useState(initialUserProfile);
+  const [recentlyPlayed, setRecentlyPlayed] = useState([]);
   const [currentlyPlaying, setCurrentlyPlaying] = useState(
     initialCurrentlyPlaying
   );
   const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0);
+
+  console.log("recently played:", recentlyPlayed);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -63,11 +66,9 @@ function App() {
       window.localStorage.setItem("token", token);
       setToken(token);
       spotify.setAccessToken(token);
-      spotify.getMyTopTracks().then((user) => {
-        console.log("Top Tracks:", user);
-      });
-      spotify.getMyRecentlyPlayedTracks().then((user) => {
-        console.log("Recent Tracks:", user);
+
+      spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((data) => {
+        setRecentlyPlayed(data.items);
       });
       spotify.getMySavedAlbums().then((user) => {
         console.log("Saved albums:", user);
@@ -110,6 +111,7 @@ function App() {
               <UserPage
                 numberArtistsFollowing={numberArtistsFollowing}
                 currentlyPlaying={currentlyPlaying}
+                recentlyPlayed={recentlyPlayed}
                 user={userProfile}
               />
             }

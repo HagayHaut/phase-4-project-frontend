@@ -36,10 +36,10 @@ function NavBar({ username, logout }) {
         {username}
       </Link>
       <Link to="/artists" style={linkStyle}>
-        Top 20 Artists
+        Top Artists
       </Link>
       <Link to="/tracks" style={linkStyle}>
-        Top 20 Tracks
+        Top Tracks
       </Link>
       <NavItem style={linkStyle} onClick={logout}>
         Logout
