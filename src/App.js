@@ -18,7 +18,10 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
-  background: #212121;
+  background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(33,33,33,1) 50%, rgba(18,18,18,1) 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
 `;
 
 const Button = styled.button`

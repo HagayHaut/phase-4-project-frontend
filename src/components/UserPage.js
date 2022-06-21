@@ -5,24 +5,38 @@ function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
   const { display_name, images, external_urls, followers } = user;
   // console.log(currentlyPlaying)
 
+  const Container = styled.div`
+    align-content: center;
+    text-align: center;
+  `;
+
+  const Welcome = styled.div`
+    margin: 2rem;
+    font-size: 2rem;
+  `;
+
+  const UserName = styled.a`
+    color: white;
+  `;
+
   if (!user.display_name) return <></>;
 
   return (
-    <div>
-      <div>
+    <Container>
+      <Welcome>
         Welcome,{" "}
-        <a href={external_urls.spotify} target="_blank">
+        <UserName href={external_urls.spotify} target="_blank">
           {display_name}!
-        </a>
-      </div>
+        </UserName>
+      </Welcome>
       <img src={images[0].url} alt="Profile Photo" />
       <div>
         <p>Followers: {followers.total}</p>
         <p>Following: {numberArtistsFollowing}</p>
         <h3>Currently Playing:</h3>
-        <p>{currentlyPlaying.item.name ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "None"} </p>
+        <p>{currentlyPlaying.item.name ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "No song currently playing!"} </p>
       </div>
-    </div>
+    </Container>
   );
 }
 
