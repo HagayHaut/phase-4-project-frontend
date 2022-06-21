@@ -20,12 +20,17 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  position: sticky;
+  width: 100%;
+  position: fixed;
   top: 0;
 `;
 
 const Content = styled.div`
   background: #212121;
+`;
+
+const Button = styled.button`
+  margin-top : 3rem;
 `;
 
 function App() {
@@ -91,10 +96,10 @@ function App() {
   return (
     <Container>
       <Header>
-        {userProfile.display_name ? <NavBar username={userProfile.display_name} logout={logout} /> : null}
+        {userProfile.display_name ? <NavBar username={userProfile.display_name} logout={logout}/> : null}
       </Header>
       <Content>
-        {!token ? <LandingPage /> : <button onClick={logout}>Logout</button>}
+        {!token ? <LandingPage /> : <Button onClick={logout}>Logout</Button>}
 
         <Routes>
           <Route path="/" element={<UserPage user={userProfile} />} />

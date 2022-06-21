@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 function UserPage({ user }) {
   const { display_name, images, external_urls } = user;
