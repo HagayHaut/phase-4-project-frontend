@@ -6,7 +6,7 @@ const TrackItem = styled.a`
   margin: 1rem;
   border-radius: 15px;
   height: 75px;
-  width: 75%;
+  width: 50%;
   background: #2b2b2b;
   color: white;
   text-decoration: none;
@@ -23,34 +23,33 @@ const Image = styled.img`
 `;
 
 const Index = styled.div`
-  width: 4.5rem;
   background: #1DB954;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  padding-top: 1.5rem;
   font-size: 1.5rem;
+  width: 4.5rem;
+  padding-top: 1.5rem;
+  text-align: center;
 `;
 
 const SongContent = styled.div`
-  width: 70%;
-  height: 100%;
-  overflow: hidden;
+  width: 60%;
 `;
 
 const Item = styled.div`
+
+  margin: .2rem;
   text-align: left;
   font-size: 1rem;
-  height: 50%;
-  margin: .5rem;
 `;
 
 const AlbumYear = styled.div`
-  width: 30%;
+  width: 50%;
   text-align: right;
   margin: 1.5rem;
 `;
 
-function Track({ index, track }) {
+function TopTrack({ index, track }) {
   const { album, artists, name, external_urls } = track;
 
   function formatArtists() {
@@ -77,7 +76,6 @@ function Track({ index, track }) {
           alt="album cover"
         />
         <SongContent>
-          
           <Item>{`Song: ${name}`}</Item>
           <Item>{"By: " + formatArtists()}</Item>
       </SongContent>
@@ -86,4 +84,4 @@ function Track({ index, track }) {
   );
 }
 
-export default Track;
+export default TopTrack;
