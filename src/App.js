@@ -11,18 +11,9 @@ import styled from "styled-components";
 
 const spotify = new SpotifyWebApi();
 
-const Container = styled.div`
-  background-color: #212121;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-`;
-
 const Header = styled.header`
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 
@@ -100,7 +91,7 @@ function App() {
   };
 
   return (
-    <Container>
+    <>
       <Header>
         {userProfile.display_name ? (
           <NavBar username={userProfile.display_name} logout={logout} />
@@ -126,7 +117,7 @@ function App() {
           <Route path="/tracks" element={<TrackPage spotify={spotify} />} />
         </Routes>
       </Content>
-    </Container>
+    </>
   );
 }
 

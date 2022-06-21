@@ -15,7 +15,7 @@ const NavUl = styled.ul`
 `;
 
 const linkStyle = {
-  margin: "1rem",
+  margin: "0.5rem",
   textDecoration: "none",
   color: "#1DB954",
   cursor: "pointer",

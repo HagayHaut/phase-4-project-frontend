@@ -11,4 +11,10 @@
 
 body {
   color: white;
+  background: #212121;
+  margin: 0;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
