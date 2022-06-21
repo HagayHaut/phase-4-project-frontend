@@ -79,7 +79,11 @@ function App() {
         setNumberArtistsFollowing(user.artists.total);
       });
 
-      spotify.getMyCurrentPlayingTrack().then(setCurrentlyPlaying);
+      spotify.getMyCurrentPlayingTrack().then(data => {
+        if(data) {
+          setCurrentlyPlaying(data);
+        }
+      });
 
       spotify.getMe().then(setUserProfile);
     }

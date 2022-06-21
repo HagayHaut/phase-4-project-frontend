@@ -20,7 +20,7 @@ function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
         <p>Followers: {followers.total}</p>
         <p>Following: {numberArtistsFollowing}</p>
         <h3>Currently Playing:</h3>
-        <p>{Object.keys(currentlyPlaying).length === 0 ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "None"} </p>
+        <p>{currentlyPlaying.item.name ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "None"} </p>
       </div>
     </div>
   );
