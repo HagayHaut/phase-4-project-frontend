@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
   const { display_name, images, external_urls, followers } = user;
-  console.log(currentlyPlaying)
+  // console.log(currentlyPlaying)
 
   if (!user.display_name) return <></>;
 
@@ -20,7 +20,7 @@ function UserPage({ user, currentlyPlaying, numberArtistsFollowing }) {
         <p>Followers: {followers.total}</p>
         <p>Following: {numberArtistsFollowing}</p>
         <h3>Currently Playing:</h3>
-        <p>{`${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}`} </p>
+        <p>{Object.keys(currentlyPlaying).length === 0 ? `${currentlyPlaying.item.name} by ${currentlyPlaying.item.artists[0].name}` : "None"} </p>
       </div>
     </div>
   );

@@ -40,9 +40,17 @@ function App() {
     images: [{ url: "" }],
     external_urls: { spotify: "" },
   };
+
+  const initialCurrentlyPlaying = {
+    item: {
+      name: "",
+      artists: [{ name: "" }]
+    }
+  }
+
   const [token, setToken] = useState("");
   const [userProfile, setUserProfile] = useState(initialUserProfile);
-  const [currentlyPlaying, setCurrentlyPlaying] = useState({})
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(initialCurrentlyPlaying);
   const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0)
 
   useEffect(() => {
