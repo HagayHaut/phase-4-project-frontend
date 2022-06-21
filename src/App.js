@@ -67,7 +67,7 @@ function App() {
       window.localStorage.setItem("token", token);
 
       setToken(token);
-
+    }
       spotify.setAccessToken(token);
 
       spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((data) => {
@@ -87,7 +87,7 @@ function App() {
       });
 
       spotify.getMe().then(setUserProfile);
-    }
+    
     setToken(token);
   }, []);
 
@@ -105,7 +105,7 @@ function App() {
         ) : null}
       </Header>
       <Content>
-        {!token ? <LandingPage /> : <Button onClick={logout}>Logout</Button>}
+        {!token ? <LandingPage /> : null}
 
         <Routes>
           <Route
