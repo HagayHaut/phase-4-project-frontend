@@ -9,13 +9,15 @@ const NavUl = styled.ul`
   flex-flow: row wrap;
   align-items: center;
   justify-content: flex-end;
-  background: #212121;
+  background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(33,33,33,1) 50%, rgba(18,18,18,1) 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   overflow: hidden;
   top: 0;
 `;
 
 const linkStyle = {
-  margin: "0.5rem",
+  margin: "1rem",
   textDecoration: "none",
   color: "#1DB954",
   cursor: "pointer",

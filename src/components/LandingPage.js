@@ -17,13 +17,14 @@ const scopes = [
 ];
 const URL = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=${RESPONSE_TYPE}`
 
-const Button = styled.button`
+const Button = styled.a`
   background: #1db954;
-  color: black;
-  padding: 1rem;
-  border-radius: 50px;
+  padding: 20px;
+  border-radius: 99px;
   cursor: pointer;
-  margin: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: black;
 `;
 
 const Container = styled.div`
@@ -31,19 +32,17 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #212121;
+  background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(33,33,33,1) 50%, rgba(18,18,18,1) 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 `;
 
 
 function LandingPage() {
 
-  function handleLogin() {
-    window.location.href = URL;
-  }
-
   return (
     <Container>
-      <Button onClick={handleLogin}>Login To Spotify</Button>
+      <Button href={URL}>LOGIN WITH SPOTIFY</Button>
     </Container>
   );
 }
