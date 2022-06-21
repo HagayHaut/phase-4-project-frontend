@@ -24,10 +24,6 @@ const Content = styled.div`
 
 `;
 
-const Button = styled.button`
-  
-`;
-
 function App() {
   // const [spotifyToken, setSpotifyToken] = useState("")
   const initialUserProfile = {
@@ -121,8 +117,8 @@ function App() {
           />
         </Routes>
         <Routes>
-          <Route path="/artists" element={<ArtistPage spotify={spotify} />} />
-          <Route path="/tracks" element={<TrackPage spotify={spotify} />} />
+          <Route path="/artists" element={<ArtistPage spotify={spotify} username={userProfile.display_name} />} />
+          <Route path="/tracks" element={<TrackPage spotify={spotify} username={userProfile.display_name} />} />
         </Routes>
       </Content>
     </>

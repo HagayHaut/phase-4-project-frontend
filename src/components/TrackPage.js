@@ -8,7 +8,14 @@ const TrackContainer = styled.div`
   align-items: center;
 `;
 
-function TrackPage({ spotify }) {
+const TopTracks = styled.h2`
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+`;
+
+function TrackPage({ spotify, username }) {
   const [topTracks, setTopTracks] = useState([]);
 
   useEffect(() => {
@@ -22,7 +29,10 @@ function TrackPage({ spotify }) {
   ));
 
   return (
+    <div>
+      <TopTracks>{username}'s Top Tracks</TopTracks>
       <TrackContainer>{trackItems}</TrackContainer>
+    </div>
   );
 }
 

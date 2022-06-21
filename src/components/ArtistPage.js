@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ArtistCard from "./ArtistCard";
+import styled from "styled-components";
 
-function ArtistPage({ spotify }) {
+const TopArtists = styled.h2`
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+`;
+
+function ArtistPage({ spotify, username }) {
   const [topArtists, setTopArtists] = useState([]);
 
   useEffect(() => {
@@ -14,7 +22,12 @@ function ArtistPage({ spotify }) {
     <ArtistCard key={index} artist={artist} index={index} />
   ));
 
-  return <div className="artist-page">{artistCards}</div>;
+  return (
+    <div>
+      <TopArtists>{username}'s Top Artists</TopArtists>
+      <div className="artist-page">{artistCards}</div>
+    </div>
+  )
 }
 
 export default ArtistPage;
