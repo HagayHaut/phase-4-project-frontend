@@ -25,7 +25,7 @@ const Content = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 3rem;
+  
 `;
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
   );
   const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0);
 
-  console.log("recently played:", recentlyPlayed);
+  // console.log("recently played:", recentlyPlayed);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -62,9 +62,12 @@ function App() {
         .split("&")
         .find((elem) => elem.startsWith("access_token"))
         .split("=")[1];
+
       window.location.hash = "";
       window.localStorage.setItem("token", token);
+
       setToken(token);
+
       spotify.setAccessToken(token);
 
       spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((data) => {
