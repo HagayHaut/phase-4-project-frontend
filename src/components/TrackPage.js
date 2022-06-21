@@ -11,7 +11,9 @@ function TrackPage({ spotify }) {
   const [topTracks, setTopTracks] = useState([]);
 
   useEffect(() => {
-    spotify.getMyTopTracks().then((data) => setTopTracks(data.items));
+    spotify
+      .getMyTopTracks({ limit: 50 })
+      .then((data) => setTopTracks(data.items));
   });
 
   const trackItems = topTracks.map((track, i) => (
