@@ -9,7 +9,7 @@ function ArtistPage({ spotify }) {
   });
 
   const artistCards = topArtists.map((artist, index) => (
-    <ArtistCard artist={artist} index={index}/>
+    <ArtistCard key={index} artist={artist} index={index} />
   ));
 
   return <div className="artist-page">{artistCards}</div>;

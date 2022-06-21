@@ -6,13 +6,14 @@ import UserPage from "./components/UserPage";
 import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import ArtistPage from "./components/ArtistPage";
-import styled from 'styled-components';
+import TrackPage from "./components/TrackPage";
+import styled from "styled-components";
 
 const spotify = new SpotifyWebApi();
 
 const Container = styled.div`
   background-color: #212121;
-  position:absolute;
+  position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -30,7 +31,7 @@ const Content = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top : 3rem;
+  margin-top: 3rem;
 `;
 
 function App() {
@@ -44,14 +45,16 @@ function App() {
   const initialCurrentlyPlaying = {
     item: {
       name: "",
-      artists: [{ name: "" }]
-    }
-  }
+      artists: [{ name: "" }],
+    },
+  };
 
   const [token, setToken] = useState("");
   const [userProfile, setUserProfile] = useState(initialUserProfile);
-  const [currentlyPlaying, setCurrentlyPlaying] = useState(initialCurrentlyPlaying);
-  const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0)
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(
+    initialCurrentlyPlaying
+  );
+  const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -79,8 +82,8 @@ function App() {
         setNumberArtistsFollowing(user.artists.total);
       });
 
-      spotify.getMyCurrentPlayingTrack().then(data => {
-        if(data) {
+      spotify.getMyCurrentPlayingTrack().then((data) => {
+        if (data) {
           setCurrentlyPlaying(data);
         }
       });
@@ -99,23 +102,28 @@ function App() {
   return (
     <Container>
       <Header>
-        {userProfile.display_name ? <NavBar username={userProfile.display_name} logout={logout} /> : null}
+        {userProfile.display_name ? (
+          <NavBar username={userProfile.display_name} logout={logout} />
+        ) : null}
       </Header>
       <Content>
         {!token ? <LandingPage /> : <Button onClick={logout}>Logout</Button>}
 
         <Routes>
-          <Route path="/" element={
-            <UserPage
-              numberArtistsFollowing={numberArtistsFollowing}
-              currentlyPlaying={currentlyPlaying}
-              user={userProfile}
-            />
-          }
+          <Route
+            path="/"
+            element={
+              <UserPage
+                numberArtistsFollowing={numberArtistsFollowing}
+                currentlyPlaying={currentlyPlaying}
+                user={userProfile}
+              />
+            }
           />
         </Routes>
         <Routes>
           <Route path="/artists" element={<ArtistPage spotify={spotify} />} />
+          <Route path="/tracks" element={<TrackPage spotify={spotify} />} />
         </Routes>
       </Content>
     </Container>
