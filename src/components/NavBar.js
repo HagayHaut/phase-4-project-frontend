@@ -2,26 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-const NavContainer = styled.nav`
-    display: flex;
-    justify-content: space-between;
-    padding-left: 25rem;
-    padding-right: 25rem;
-`
+
+const NavUl = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-end;
+  text-decoration: none;
+  background: #212121;
+  overflow: hidden;
+  top: 0;
+`;
+
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "underline",
+  color: '#1DB954'
+}
+
 
 function NavBar({ username }) {
   return (
-    <NavContainer>
-      
-          <Link to="/">
-            <h3>{username}</h3>
+    <NavUl>
+          <Link to="/" style={linkStyle}>
+            {username}
           </Link>
-
-          <Link to="/artists">
-            <h3>Artists</h3>
+          <Link to="/artists" style={linkStyle}>
+            Artists
           </Link>
-
-    </NavContainer>
+    </NavUl>
   );
 }
 

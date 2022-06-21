@@ -19,7 +19,7 @@ const URL = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI
 
 const Button = styled.button`
   background: #1db954;
-  color: 	#535353;
+  color: black;
   padding: 1rem;
   border-radius: 50px;
   cursor: pointer;
@@ -31,6 +31,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #212121;
 `;
 
 

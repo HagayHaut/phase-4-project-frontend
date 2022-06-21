@@ -15,3 +15,7 @@
   height: 100px;
   width: auto;
 }
+
+* {
+  font-family: 'Asap', sans-serif;
+}

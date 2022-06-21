@@ -19,6 +19,11 @@ const Container = styled.div`
   left: 0px;
 `;
 
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+`;
+
 function App() {
   // const [spotifyToken, setSpotifyToken] = useState("")
   const initialUserProfile = {
@@ -81,9 +86,9 @@ function App() {
 
   return (
     <Container>
-      <header>
+      <Header>
         {userProfile.display_name ? <NavBar username={userProfile.display_name} /> : null}
-      </header>
+      </Header>
       <div>
         {!token ? <LandingPage /> : <button onClick={logout}>Logout</button>}
 
