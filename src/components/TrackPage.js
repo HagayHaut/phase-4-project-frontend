@@ -17,12 +17,14 @@ const TopTracks = styled.h2`
 
 function TrackPage({ spotify, username }) {
   const [topTracks, setTopTracks] = useState([]);
+  const [showAllTime, setShowAllTime] = useState(false);
 
   useEffect(() => {
+    const timeRange = showAllTime ? "long_term" : "medium_term";
     spotify
-      .getMyTopTracks({ limit: 50 })
+      .getMyTopTracks({ limit: 50, time_range: timeRange })
       .then((data) => setTopTracks(data.items));
-  });
+  }, [showAllTime]);
 
   const trackItems = topTracks.map((track, i) => (
     <TopTrack key={i} index={i} track={track} />
@@ -30,6 +32,20 @@ function TrackPage({ spotify, username }) {
 
   return (
     <div>
+      <>
+        <label>Past 6 Months</label>
+        <input
+          type="radio"
+          checked={!showAllTime}
+          onChange={() => setShowAllTime((pre) => !pre)}
+        ></input>
+        <label>All Time</label>
+        <input
+          type="radio"
+          checked={showAllTime}
+          onChange={() => setShowAllTime((pre) => !pre)}
+        ></input>
+      </>
       <TopTracks>{username}'s Top Tracks</TopTracks>
       <TrackContainer>{trackItems}</TrackContainer>
     </div>
