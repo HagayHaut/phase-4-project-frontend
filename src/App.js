@@ -47,8 +47,6 @@ function App() {
   );
   const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0);
 
-  // console.log("recently played:", recentlyPlayed);
-
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -64,28 +62,42 @@ function App() {
 
       setToken(token);
     }
-      spotify.setAccessToken(token);
+    spotify.setAccessToken(token);
 
-      spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((data) => {
-        setRecentlyPlayed(data.items);
-      });
-      spotify.getMySavedAlbums().then((user) => {
-        console.log("Saved albums:", user);
-      });
-      spotify.getFollowedArtists().then((user) => {
-        setNumberArtistsFollowing(user.artists.total);
-      });
-
-      spotify.getMyCurrentPlayingTrack().then((data) => {
-        if (data) {
-          setCurrentlyPlaying(data);
-        }
-      });
-
-      spotify.getMe().then(setUserProfile);
+    spotify.getMyRecentlyPlayedTracks({ limit: 50 }).then((data) => {
+      setRecentlyPlayed(data.items);
+    });
+    spotify.getFollowedArtists().then((user) => {
+      setNumberArtistsFollowing(user.artists.total);
+    });
+    spotify.getMyCurrentPlayingTrack().then((data) => {
+      console.log(data)
+      if (data) {
+        setCurrentlyPlaying(data);
+      }
+    });
+    spotify.getMe().then(data => {
+      setUserProfile(data)
+      handleUserLogin(data)
+    });
     
     setToken(token);
   }, []);
+
+  function handleUserLogin(userObj){
+    const name = userObj.display_name
+    const user = {name: name}
+
+    fetch("http://localhost:3000/users",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(console.log)
+  }
 
   const logout = () => {
     setToken("");
