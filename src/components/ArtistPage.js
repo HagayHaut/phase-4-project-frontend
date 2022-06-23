@@ -24,23 +24,23 @@ const Cont = styled.div`
   justify-content: center;
   margin-left: 20rem;
   margin-right: 20rem;
-  @media (max-width: 1715px) {
+  @media (min-width: 1555px) and (max-width: 1715px) {
     margin-left: 15rem;
     margin-right: 15rem;
   }
-  @media (max-width: 1555px) {
+  @media (min-width: 1395px) and (max-width: 1555px) {
     margin-left: 10rem;
     margin-right: 10rem;
   }
-  @media (max-width: 1395px) {
+  @media (min-width: 805px) and (max-width: 1395px) {
     margin-left: 5rem;
     margin-right: 5rem;
   }
-  @media (max-width: 805px) {
+  @media (min-width: 645px) and (max-width: 805px) {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  @media (max-width: 677px) {
+  @media (max-width: 645px) {
     margin: 0;
   }
 `;
@@ -54,6 +54,10 @@ const ArtistContainer = styled.div`
 
 const ArtistPageContainer = styled.div`
   
+`;
+
+const Input = styled.input`
+  accent-color: #1DB954;
 `;
 
 function ArtistPage({ spotify, username }) {
@@ -103,19 +107,19 @@ function ArtistPage({ spotify, username }) {
       <FilterContainer>
         <LabelContainer>
         <label>Past 6 Months</label>
-        <input
+        <Input
           type="radio"
           checked={!showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
-        ></input>
+        ></Input>
         </LabelContainer>
         <LabelContainer>
         <label>All Time</label>
-        <input
+        <Input
           type="radio"
           checked={showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
-        ></input>
+        ></Input>
         </LabelContainer>
       </FilterContainer>
 

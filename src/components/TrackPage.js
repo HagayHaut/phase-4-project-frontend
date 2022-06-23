@@ -26,6 +26,10 @@ const LabelContainer = styled.div`
   margin: 1rem;
 `;
 
+const Input = styled.input`
+  accent-color: #1DB954;
+`;
+
 function TrackPage({ spotify, username }) {
   const [topTracks, setTopTracks] = useState([]);
   const [showAllTime, setShowAllTime] = useState(false);
@@ -52,19 +56,19 @@ function TrackPage({ spotify, username }) {
       <FilterContainer>
         <LabelContainer>
         <label>Past 6 Months</label>
-        <input
+        <Input
           type="radio"
           checked={!showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
-        ></input>
+        ></Input>
         </LabelContainer>
         <LabelContainer>
         <label>All Time</label>
-        <input
+        <Input
           type="radio"
           checked={showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
-        ></input>
+        ></Input>
         </LabelContainer>
       </FilterContainer>
       <TrackContainer>{trackItems}</TrackContainer>

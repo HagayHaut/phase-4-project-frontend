@@ -56,7 +56,7 @@ function UserPage({
         <p>
           {currentlyPlaying.item.name
             ? `${currentlyPlaying.item.artists[0].name} - ${currentlyPlaying.item.name}`
-            : "None"}{" "}
+            : "Nothing currently playing"}{" "}
         </p>
       </div>
       <h3>Recently Played:</h3>
