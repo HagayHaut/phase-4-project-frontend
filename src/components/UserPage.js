@@ -16,9 +16,10 @@ function UserPage({
     text-align: center;
   `;
 
-  const Welcome = styled.div`
-    margin: 2rem;
-    font-size: 2rem;
+  const Welcome = styled.h2`
+    font-size: 2.5rem;
+    margin: 0;
+    padding-top: 2rem;
   `;
 
   const UserName = styled.a`
@@ -33,6 +34,8 @@ function UserPage({
 
   const Image = styled.img`
     border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem;
   `;
 
   if (!user.display_name) return <></>;

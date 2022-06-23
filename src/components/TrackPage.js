@@ -10,9 +10,20 @@ const TrackContainer = styled.div`
 
 const TopTracks = styled.h2`
   text-align: center;
+  font-size: 2.5rem;
   margin: 0;
-  padding: 0;
-  font-size: 1.5rem;
+  padding-top: 2rem;
+`;
+
+const FilterContainer = styled.div`
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+`;
+
+const LabelContainer = styled.div`
+  margin: 1rem;
 `;
 
 function TrackPage({ spotify, username }) {
@@ -20,6 +31,10 @@ function TrackPage({ spotify, username }) {
   const [showAllTime, setShowAllTime] = useState(false);
 
   useEffect(() => {
+
+    let token = window.localStorage.getItem("token");
+    spotify.setAccessToken(token);
+    
     const timeRange = showAllTime ? "long_term" : "medium_term";
     spotify
       .getMyTopTracks({ limit: 50, time_range: timeRange })
@@ -32,21 +47,26 @@ function TrackPage({ spotify, username }) {
 
   return (
     <div>
-      <>
+      
+      <TopTracks>{username}'s Top Tracks</TopTracks>
+      <FilterContainer>
+        <LabelContainer>
         <label>Past 6 Months</label>
         <input
           type="radio"
           checked={!showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
         ></input>
+        </LabelContainer>
+        <LabelContainer>
         <label>All Time</label>
         <input
           type="radio"
           checked={showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
         ></input>
-      </>
-      <TopTracks>{username}'s Top Tracks</TopTracks>
+        </LabelContainer>
+      </FilterContainer>
       <TrackContainer>{trackItems}</TrackContainer>
     </div>
   );

@@ -6,7 +6,7 @@ const TrackItem = styled.a`
   margin: 1rem;
   border-radius: 15px;
   height: 75px;
-  width: 75%;
+  width: 50%;
   background: #2b2b2b;
   color: white;
   text-decoration: none;
@@ -37,18 +37,26 @@ const SongContent = styled.div`
   overflow: hidden;
 `;
 
-const Item = styled.div`
-  text-align: left;
-  font-size: 1rem;
-  height: 50%;
-  margin: .5rem;
-`;
-
 const AlbumYear = styled.div`
   width: 30%;
   text-align: right;
   margin: 1.5rem;
 `;
+
+const SongName = styled.div`
+  margin: .5rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 900;
+`;
+
+const ArtistName = styled.div`
+  margin: .5rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 100;
+  color: #A9A9A9;
+  `;
 
 function Track({ index, track }) {
   const { album, artists, name, external_urls } = track;
@@ -77,11 +85,10 @@ function Track({ index, track }) {
           alt="album cover"
         />
         <SongContent>
-          
-          <Item>{`Song: ${name}`}</Item>
-          <Item>{"By: " + formatArtists()}</Item>
+          <SongName>{`${name}`}</SongName>
+          <ArtistName>{formatArtists()}</ArtistName>
       </SongContent>
-      <AlbumYear>{"Album Year: " + getAlbumYear()}</AlbumYear>
+      <AlbumYear>{ getAlbumYear()}</AlbumYear>
     </TrackItem>
   );
 }

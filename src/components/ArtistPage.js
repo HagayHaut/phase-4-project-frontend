@@ -4,9 +4,37 @@ import styled from "styled-components";
 
 const TopArtists = styled.h2`
   text-align: center;
+  font-size: 2.5rem;
   margin: 0;
-  padding: 0;
-  font-size: 1.5rem;
+  padding-top: 2rem;
+`;
+
+const FilterContainer = styled.div`
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+`;
+
+const LabelContainer = styled.div`
+  margin: 1rem;
+`;
+
+const Cont = styled.div`
+  justify-content: center;
+  margin-left: 20rem;
+  margin-right: 20rem;
+`;
+
+const ArtistContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  grid-auto-rows: auto;
+  width: 100%;
+`;
+
+const ArtistPageContainer = styled.div`
+  
 `;
 
 function ArtistPage({ spotify, username }) {
@@ -31,11 +59,13 @@ function ArtistPage({ spotify, username }) {
           body: JSON.stringify(body)
         })
           .then(res => res.json())
-          .then(console.log)
       })
   }, [topArtists])
 
   useEffect(() => {
+    let token = window.localStorage.getItem("token");
+    spotify.setAccessToken(token);
+
     const timeRange = showAllTime ? "long_term" : "medium_term";
     spotify
       .getMyTopArtists({ limit: 50, time_range: timeRange })
@@ -47,24 +77,33 @@ function ArtistPage({ spotify, username }) {
   ));
 
   return (
-    <div>
-      <>
+    <ArtistPageContainer>
+      
+      <TopArtists>{username}'s Top Artists</TopArtists>
+
+      <FilterContainer>
+        <LabelContainer>
         <label>Past 6 Months</label>
         <input
           type="radio"
           checked={!showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
         ></input>
+        </LabelContainer>
+        <LabelContainer>
         <label>All Time</label>
         <input
           type="radio"
           checked={showAllTime}
           onChange={() => setShowAllTime((pre) => !pre)}
         ></input>
-      </>
-      <TopArtists>{username}'s Top Artists</TopArtists>
-      <div className="artist-page">{artistCards}</div>
-    </div>
+        </LabelContainer>
+      </FilterContainer>
+
+      <Cont>
+      <ArtistContainer>{artistCards}</ArtistContainer>
+      </Cont>
+    </ArtistPageContainer>
   );
 }
 

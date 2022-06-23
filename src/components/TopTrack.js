@@ -36,12 +36,20 @@ const SongContent = styled.div`
   width: 60%;
 `;
 
-const Item = styled.div`
-
-  margin: .2rem;
+const SongName = styled.div`
+  margin: .5rem;
   text-align: left;
   font-size: 1rem;
+  font-weight: 900;
 `;
+
+const ArtistName = styled.div`
+  margin: .5rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 100;
+  color: #A9A9A9;
+  `;
 
 const AlbumYear = styled.div`
   width: 50%;
@@ -76,10 +84,10 @@ function TopTrack({ index, track }) {
           alt="album cover"
         />
         <SongContent>
-          <Item>{`Song: ${name}`}</Item>
-          <Item>{"By: " + formatArtists()}</Item>
+          <SongName>{`${name}`}</SongName>
+          <ArtistName>{formatArtists()}</ArtistName>
       </SongContent>
-      <AlbumYear>{"Album Year: " + getAlbumYear()}</AlbumYear>
+      <AlbumYear>{getAlbumYear()}</AlbumYear>
     </TrackItem>
   );
 }
