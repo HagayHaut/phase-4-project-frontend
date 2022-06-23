@@ -15,7 +15,7 @@ const Card = styled.div`
   }
   cursor: pointer;
 
-  @media (max-width: 430px) {
+  @media (max-width: 822px) {
     width: 100%;
     justify-self: center;
     align-self: center;
