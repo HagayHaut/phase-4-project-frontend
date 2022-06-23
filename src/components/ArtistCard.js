@@ -14,6 +14,12 @@ const Card = styled.div`
     background-color: #535353;
   }
   cursor: pointer;
+
+  @media (max-width: 430px) {
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+  }
 `;
 
 const ArtistPhoto = styled.img`

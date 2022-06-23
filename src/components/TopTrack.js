@@ -14,6 +14,13 @@ const TrackItem = styled.a`
     background-color: #535353;
   }
   cursor: pointer;
+  @media (min-width: 890px) and (max-width: 1355px) {
+    width: 75%;
+  }
+
+  @media (min-width: 390px) and (max-width: 890px) {
+    width: 100%;
+  }
 `;
 
 const Image = styled.img`
@@ -33,7 +40,9 @@ const Index = styled.div`
 `;
 
 const SongContent = styled.div`
-  width: 60%;
+  width: 95%;
+  height: 100%;
+  overflow: hidden;
 `;
 
 const SongName = styled.div`
@@ -41,6 +50,9 @@ const SongName = styled.div`
   text-align: left;
   font-size: 1rem;
   font-weight: 900;
+  @media(max-width: 657px) {
+    font-size: .9rem;
+  }
 `;
 
 const ArtistName = styled.div`
@@ -49,10 +61,13 @@ const ArtistName = styled.div`
   font-size: 1rem;
   font-weight: 100;
   color: #A9A9A9;
+  @media(max-width: 657px) {
+    font-size: .9rem;
+  }
   `;
 
 const AlbumYear = styled.div`
-  width: 50%;
+  width: 5%;
   text-align: right;
   margin: 1.5rem;
 `;
