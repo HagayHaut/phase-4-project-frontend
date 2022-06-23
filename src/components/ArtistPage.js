@@ -52,38 +52,35 @@ const ArtistContainer = styled.div`
   width: 100%;
 `;
 
-const ArtistPageContainer = styled.div`
-  
-`;
+const ArtistPageContainer = styled.div``;
 
 const Input = styled.input`
-  accent-color: #1DB954;
+  accent-color: #1db954;
 `;
 
-function ArtistPage({ spotify, username }) {
+function ArtistPage({ spotify, username, prevTopArtists }) {
   const [topArtists, setTopArtists] = useState([]);
   const [showAllTime, setShowAllTime] = useState(false);
 
   useEffect(() => {
-    const artistNames = topArtists.map(artist => artist.name)
+    const artistNames = topArtists.map((artist) => artist.name);
     fetch("http://localhost:3000/users")
-      .then(res => res.json())
-      .then(users => {
-        const user = users.find(user => user.name === username)
+      .then((res) => res.json())
+      .then((users) => {
+        const user = users.find((user) => user.name === username);
         const body = {
           user_id: user.id,
-          artistlist: artistNames
-        }
+          artistlist: artistNames,
+        };
         fetch(`http://localhost:3000/top_artistlists`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(body)
-        })
-          .then(res => res.json())
-      })
-  }, [topArtists])
+          body: JSON.stringify(body),
+        }).then((res) => res.json());
+      });
+  }, [topArtists]);
 
   useEffect(() => {
     let token = window.localStorage.getItem("token");
@@ -92,8 +89,24 @@ function ArtistPage({ spotify, username }) {
     const timeRange = showAllTime ? "long_term" : "medium_term";
     spotify
       .getMyTopArtists({ limit: 50, time_range: timeRange })
-      .then((data) => setTopArtists(data.items));
+      .then((data) => {
+        setTopArtists(compareToPrev(prevTopArtists, data.items));
+      });
   }, [showAllTime]);
+
+  function compareToPrev(prev, curr) {
+    const updatedCurr = curr.map((artist, i) => {
+      const compareIdx = prev.indexOf(artist.name);
+      if (compareIdx < i) {
+        return { ...artist, update: -1 };
+      } else if (compareIdx > i) {
+        return { ...artist, update: 1 };
+      } else {
+        return { ...artist, update: 0 };
+      }
+    });
+    return updatedCurr;
+  }
 
   const artistCards = topArtists.map((artist, index) => (
     <ArtistCard key={index} artist={artist} index={index} />
@@ -101,30 +114,29 @@ function ArtistPage({ spotify, username }) {
 
   return (
     <ArtistPageContainer>
-      
       <TopArtists>{username}'s Top Artists</TopArtists>
 
       <FilterContainer>
         <LabelContainer>
-        <label>Past 6 Months</label>
-        <Input
-          type="radio"
-          checked={!showAllTime}
-          onChange={() => setShowAllTime((pre) => !pre)}
-        ></Input>
+          <label>Past 6 Months</label>
+          <Input
+            type="radio"
+            checked={!showAllTime}
+            onChange={() => setShowAllTime((pre) => !pre)}
+          ></Input>
         </LabelContainer>
         <LabelContainer>
-        <label>All Time</label>
-        <Input
-          type="radio"
-          checked={showAllTime}
-          onChange={() => setShowAllTime((pre) => !pre)}
-        ></Input>
+          <label>All Time</label>
+          <Input
+            type="radio"
+            checked={showAllTime}
+            onChange={() => setShowAllTime((pre) => !pre)}
+          ></Input>
         </LabelContainer>
       </FilterContainer>
 
       <Cont>
-      <ArtistContainer>{artistCards}</ArtistContainer>
+        <ArtistContainer>{artistCards}</ArtistContainer>
       </Cont>
     </ArtistPageContainer>
   );

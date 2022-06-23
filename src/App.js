@@ -18,10 +18,14 @@ const Header = styled.header`
 `;
 
 const Content = styled.div`
-  background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(33,33,33,1) 50%, rgba(18,18,18,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(18, 18, 18, 1) 0%,
+    rgba(33, 33, 33, 1) 50%,
+    rgba(18, 18, 18, 1) 100%
+  );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-
 `;
 
 function App() {
@@ -46,6 +50,8 @@ function App() {
     initialCurrentlyPlaying
   );
   const [numberArtistsFollowing, setNumberArtistsFollowing] = useState(0);
+  const [prevTopArtists, setPrevTopArtists] = useState([]);
+  const [railsUser, setRailsUser] = useState({});
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -71,32 +77,51 @@ function App() {
       setNumberArtistsFollowing(user.artists.total);
     });
     spotify.getMyCurrentPlayingTrack().then((data) => {
-      console.log(data)
+      console.log(data);
       if (data) {
         setCurrentlyPlaying(data);
       }
     });
-    spotify.getMe().then(data => {
-      setUserProfile(data)
-      handleUserLogin(data)
+    spotify.getMe().then((data) => {
+      setUserProfile(data);
+      handleUserLogin(data);
     });
-    
+
     setToken(token);
   }, []);
 
-  function handleUserLogin(userObj){
-    const name = userObj.display_name
-    const user = {name: name}
+  useEffect(() => {
+    fetch(`http://localhost:3000/prev_top_artistlist/${railsUser.id}`)
+      .then((res) => res.json())
+      .then(setPrevTopArtists);
+  }, [railsUser]);
 
-    fetch("http://localhost:3000/users",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-    })
-    .then(res => res.json())
-    .then(console.log)
+  function handleUserLogin(userObj) {
+    const name = userObj.display_name;
+    const user = { name: name };
+
+    fetch("http://localhost:3000/users")
+      .then((res) => res.json())
+      .then((users) => {
+        const returningUser = users.find((user) => user.name === name);
+        if (returningUser) {
+          setRailsUser(returningUser);
+        } else {
+          fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then(setRailsUser);
+        }
+      });
+    // GET all users from rails
+    // check if name is included
+    // if yes, just setRailsUser(that user)
+    // else, we go ahead with the fetch below
   }
 
   const logout = () => {
@@ -129,8 +154,26 @@ function App() {
           />
         </Routes>
         <Routes>
-          <Route path="/artists" element={<ArtistPage spotify={spotify} username={userProfile.display_name} />} />
-          <Route path="/tracks" element={<TrackPage spotify={spotify} username={userProfile.display_name} />} />
+          <Route
+            path="/artists"
+            element={
+              <ArtistPage
+                spotify={spotify}
+                username={userProfile.display_name}
+                railsUser={railsUser}
+                prevTopArtists={prevTopArtists}
+              />
+            }
+          />
+          <Route
+            path="/tracks"
+            element={
+              <TrackPage
+                spotify={spotify}
+                username={userProfile.display_name}
+              />
+            }
+          />
         </Routes>
       </Content>
     </>
