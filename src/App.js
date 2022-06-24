@@ -7,6 +7,7 @@ import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import ArtistPage from "./components/ArtistPage";
 import TrackPage from "./components/TrackPage";
+import RecommendedPage from "./components/RecommendedPage";
 import styled from "styled-components";
 
 const spotify = new SpotifyWebApi();
@@ -98,6 +99,11 @@ function App() {
         setCurrentlyPlaying(data);
       }
     });
+    spotify
+      .getRecommendations({
+        seed_artists: ["5Z1XZyEFY0dewG8faEIiEx", "2te8VJxgUxcElC8Uq6eJs6"],
+      })
+      .then(console.log);
     spotify.getMe().then((data) => {
       setUserProfile(data);
       handleUserLogin(data);
@@ -106,34 +112,34 @@ function App() {
     setToken(token);
   }, []);
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/prev_top_artistlist/${railsUser.id}`)
-      .then((res) => res.json())
-      .then(setPrevTopArtists);
-  }, [railsUser]);
+  //   useEffect(() => {
+  //     fetch(`http://localhost:3000/prev_top_artistlist/${railsUser.id}`)
+  //       .then((res) => res.json())
+  //       .then(setPrevTopArtists);
+  //   }, [railsUser]);
 
   function handleUserLogin(userObj) {
     const name = userObj.display_name;
     const user = { name: name };
 
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((users) => {
-        const returningUser = users.find((user) => user.name === name);
-        if (returningUser) {
-          setRailsUser(returningUser);
-        } else {
-          fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-          })
-            .then((res) => res.json())
-            .then(setRailsUser);
-        }
-      });
+    // fetch("http://localhost:3000/users")
+    //   .then((res) => res.json())
+    //   .then((users) => {
+    //     const returningUser = users.find((user) => user.name === name);
+    //     if (returningUser) {
+    //       setRailsUser(returningUser);
+    //     } else {
+    //       fetch("http://localhost:3000/users", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(user),
+    //       })
+    //         .then((res) => res.json())
+    //         .then(setRailsUser);
+    //     }
+    //   });
     // GET all users from rails
     // check if name is included
     // if yes, just setRailsUser(that user)
@@ -191,6 +197,15 @@ function App() {
             path="/tracks"
             element={
               <TrackPage
+                spotify={spotify}
+                username={userProfile.display_name}
+              />
+            }
+          />
+          <Route
+            path="/recommended"
+            element={
+              <RecommendedPage
                 spotify={spotify}
                 username={userProfile.display_name}
               />

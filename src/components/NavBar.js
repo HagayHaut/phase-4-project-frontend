@@ -9,7 +9,12 @@ const NavUl = styled.ul`
   flex-flow: row wrap;
   align-items: center;
   justify-content: flex-end;
-  background: linear-gradient(90deg, rgba(18,18,18,1) 0%, rgba(33,33,33,1) 50%, rgba(18,18,18,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(18, 18, 18, 1) 0%,
+    rgba(33, 33, 33, 1) 50%,
+    rgba(18, 18, 18, 1) 100%
+  );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   overflow: hidden;
@@ -40,6 +45,9 @@ function NavBar({ username, logout }) {
       </Link>
       <Link to="/tracks" style={linkStyle}>
         Top Tracks
+      </Link>
+      <Link to="/recommended" style={linkStyle}>
+        Recommended
       </Link>
       <NavItem style={linkStyle} onClick={logout}>
         Logout

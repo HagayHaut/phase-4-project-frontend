@@ -62,25 +62,25 @@ function ArtistPage({ spotify, username, prevTopArtists }) {
   const [topArtists, setTopArtists] = useState([]);
   const [showAllTime, setShowAllTime] = useState(false);
 
-  useEffect(() => {
-    const artistNames = topArtists.map((artist) => artist.name);
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((users) => {
-        const user = users.find((user) => user.name === username);
-        const body = {
-          user_id: user.id,
-          artistlist: artistNames,
-        };
-        fetch(`http://localhost:3000/top_artistlists`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }).then((res) => res.json());
-      });
-  }, [topArtists]);
+  // useEffect(() => {
+  //   const artistNames = topArtists.map((artist) => artist.name);
+  //   fetch("http://localhost:3000/users")
+  //     .then((res) => res.json())
+  //     .then((users) => {
+  //       const user = users.find((user) => user.name === username);
+  //       const body = {
+  //         user_id: user.id,
+  //         artistlist: artistNames,
+  //       };
+  //       fetch(`http://localhost:3000/top_artistlists`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(body),
+  //       }).then((res) => res.json());
+  //     });
+  // }, [topArtists]);
 
   useEffect(() => {
     let token = window.localStorage.getItem("token");
