@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import RecentlyPlayed from "./RecentlyPlayed";
 import styled from "styled-components";
 
-function UserPage({
-  user,
-  currentlyPlaying,
-  numberArtistsFollowing,
-  recentlyPlayed,
-}) {
-  const { display_name, images, external_urls, followers } = user;
-  // console.log(currentlyPlaying)
-
-  const Container = styled.div`
+const Container = styled.div`
     align-content: center;
     text-align: center;
   `;
@@ -37,6 +28,17 @@ function UserPage({
     object-fit: cover;
     margin: 1rem;
   `;
+
+function UserPage({
+  user,
+  currentlyPlaying,
+  numberArtistsFollowing,
+  recentlyPlayed,
+}) {
+  const { display_name, images, external_urls, followers } = user;
+  // console.log(currentlyPlaying)
+
+
 
   if (!user.display_name) return <></>;
 
