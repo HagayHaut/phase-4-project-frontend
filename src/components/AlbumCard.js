@@ -1,4 +1,34 @@
 import React from "react";
+import styled from "styled-components";
+
+const Card = styled.div`
+    display: inline-block;
+    text-align: center;
+    margin: 1rem;
+    border-radius: 5px;
+    max-width: 200px;
+    height: 250px;
+    background: #2b2b2b;
+    color: white;
+    &:hover {
+        background-color: #535353;
+    }
+    cursor: pointer;
+
+    @media (max-width: 822px) {
+        width: 100%;
+        justify-self: center;
+        align-self: center;
+    }
+`;
+
+const ArtistPhoto = styled.img`
+    height: 150px;
+    width: 150px;
+    margin-top: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+`;
 
 function AlbumCard({ index, album }) {
   const { name, artists, external_urls, images, release_date, album_type } =
@@ -17,16 +47,16 @@ function AlbumCard({ index, album }) {
   }
 
   return (
-    <div>
+    <Card>
       <a href={external_urls.spotify} target="_blank">
-        <img src={images[1].url} alt="album cover" />
+        <ArtistPhoto src={images[1].url} alt="album cover" />
       </a>
 
       <h4>{name}</h4>
       <h5>{release_date.slice(0, 4)}</h5>
       <h5>{formatArtists()}</h5>
       <h5>{album_type}</h5>
-    </div>
+    </Card>
   );
 }
 
