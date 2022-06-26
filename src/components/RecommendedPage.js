@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AlbumCard from "./AlbumCard";
 import styled from "styled-components";
 
-const ArtistContainer = styled.div`
+const AlbumContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
     grid-auto-rows: auto;
@@ -77,12 +77,12 @@ function RecommendedPage({ spotify, username }) {
     }
 
     const recommendedAlbumItems = recommendedAlbums.map((album, i) => (
-        <AlbumCard key={i} index={i} album={album} />
+        <AlbumCard key={i} album={album} />
     ));
 
     return (
         <Cont>
-            <ArtistContainer>{recommendedAlbumItems}</ArtistContainer>
+            <AlbumContainer>{recommendedAlbumItems}</AlbumContainer>
         </Cont>
     );
 }

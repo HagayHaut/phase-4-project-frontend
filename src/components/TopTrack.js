@@ -24,9 +24,8 @@ const TrackItem = styled.a`
 `;
 
 const Image = styled.img`
-  height: auto;
-  width: auto;
-  border-radius: 5px;
+  height: 75px;
+  width: 75px;
 `;
 
 const Index = styled.div`
@@ -94,13 +93,13 @@ function TopTrack({ index, track }) {
   return (
     <TrackItem href={external_urls.spotify} target="_blank">
       <Index>{`${index + 1}`}</Index>
-        <Image
-          src={album.images[album.images.length - 1].url}
-          alt="album cover"
-        />
-        <SongContent>
-          <SongName>{`${name}`}</SongName>
-          <ArtistName>{formatArtists()}</ArtistName>
+      <Image
+        src={album.images[album.images.length - 1].url}
+        alt="album cover"
+      />
+      <SongContent>
+        <SongName>{`${name}`}</SongName>
+        <ArtistName>{formatArtists()}</ArtistName>
       </SongContent>
       <AlbumYear>{getAlbumYear()}</AlbumYear>
     </TrackItem>
