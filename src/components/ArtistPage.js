@@ -95,7 +95,6 @@ function ArtistPage({ spotify, username, prevTopArtists }) {
   return (
     <ArtistPageContainer>
       <TopArtists>{username}'s Top Artists</TopArtists>
-
       <FilterContainer>
         <LabelContainer>
           <label>Past 6 Months</label>

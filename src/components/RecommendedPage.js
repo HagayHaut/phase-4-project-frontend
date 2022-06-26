@@ -9,6 +9,14 @@ const AlbumContainer = styled.div`
     width: 100%;
 `;
 
+const Recommendations = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+`;
+
 const Cont = styled.div`
     justify-content: center;
     margin-left: 20rem;
@@ -82,6 +90,7 @@ function RecommendedPage({ spotify, username }) {
 
     return (
         <Cont>
+            <Recommendations>{username}'s Recommendations</Recommendations>
             <AlbumContainer>{recommendedAlbumItems}</AlbumContainer>
         </Cont>
     );
