@@ -94,13 +94,13 @@ function LandingPage() {
         <Button href={URL}>LOGIN WITH SPOTIFY</Button>
       </Container>
       <Footer>
-        By:{" "}
-        <ATags href="https://github.com/bradbieselin" target="_blank">
-          <ByP>Brad Bieselin</ByP>
-        </ATags>
-        ,{" "}
+        created by{" "}
         <ATags href="https://github.com/HagayHaut" target="_blank">
           <ByP>Hagay Haut</ByP>
+        </ATags>{" "}
+        ,{" "}
+        <ATags href="https://github.com/bradbieselin" target="_blank">
+          <ByP>Brad Bieselin</ByP>
         </ATags>{" "}
         and{" "}
         <ATags href="https://github.com/murphy-mi/" target="_blank">
